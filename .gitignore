@@ -1,0 +1,17 @@
+# Virtual environment
+venv/
+
+# Django specific files
+__pycache__/
+*.pyc
+db.sqlite3
+chinook.db
+
+# IDE working files (here VS Code)
+.vscode/
+
+# References: 
+
+# https://www.atlassian.com/fr/git/tutorials/saving-changes/gitignore
+# https://djangowaves.com/tips-tricks/gitignore-for-a-django-project
+# https://git-scm.com/docs/gitignore
