@@ -14,8 +14,10 @@ class Itineraire(models.Model):
     denivele_neg = models.IntegerField("Dénivelé négatif cumulé (en m")
     duree_estimee = models.FloatField("Durée estimée (en h)")
     difficulte_estimee = models.IntegerField("Difficulté estimée (de 1 à 5)",default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
-    
-
+    def __str__(self):
+        return self.titre
+     
+     
 class Sortie(models.Model):
     utilisateur = models.ForeignKey(User, on_delete=models.CASCADE)
     itineraire = models.ForeignKey('Itineraire', on_delete=models.CASCADE)
