@@ -19,23 +19,23 @@ class Itineraire(models.Model):
      
      
 class Sortie(models.Model):
-    utilisateur = models.ForeignKey(User, on_delete=models.CASCADE)
-    itineraire = models.ForeignKey('Itineraire', on_delete=models.CASCADE)
-    date_sortie = models.DateField("Date de sortie")
-    duree_reelle = models.FloatField("Durée réelle (en h)")
-    nb_personne = models.IntegerField("Nombre de personnes ayant participé à la sortie")
+   utilisateur = models.ForeignKey(User, on_delete=models.CASCADE)
+   itineraire = models.ForeignKey('Itineraire', on_delete=models.CASCADE)
+   duree_reelle = models.FloatField("Durée réelle (en h)")
+   nb_personne = models.IntegerField("Nombre de personnes ayant participé à la sortie")
     
-    ## attribut expérience du groupe
+   ## attribut expérience du groupe
 
-    NIVEAUX = [('0', ('Tous débutants')),
-       ('1', ('Mixte')),
-       ('2', ('Tous experts')),]
-    niveaux = models.CharField("Niveau des personnes", max_length=32, choices=NIVEAUX)
+   NIVEAUX = [('0', ('Tous débutants')),
+      ('1', ('Mixte')),
+      ('2', ('Tous experts')),]
+   niveaux = models.CharField("Niveau des personnes", max_length=32, choices=NIVEAUX)
 
     
-    METEO = [('0', ('Bonne météo')),
-       ('1', ('Météo moyenne')),
-       ('2', ('Mauvaise météo')),]
-    meteo = models.CharField("Météo", max_length=32, choices=METEO)
-    difficulte_reelle = models.IntegerField("Difficulté ressentie (de 1 à 5)",default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
+   METEO = [('0', ('Bonne météo')),
+      ('1', ('Météo moyenne')),
+      ('2', ('Mauvaise météo')),]
+   meteo = models.CharField("Météo", max_length=32, choices=METEO)
+   difficulte_reelle  = models.IntegerField("Difficulté ressentie (de 1 à 5)",default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
+   date_de_sortie = models.DateField("Date de sortie")
 
