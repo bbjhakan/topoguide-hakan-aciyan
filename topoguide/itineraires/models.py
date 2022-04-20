@@ -38,4 +38,6 @@ class Sortie(models.Model):
    meteo = models.CharField("Météo", max_length=32, choices=METEO)
    difficulte_reelle  = models.IntegerField("Difficulté ressentie (de 1 à 5)",default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
    date_de_sortie = models.DateField("Date de sortie")
+   def __str__(self):
+        return str(self.itineraire)+" - par " + str(self.utilisateur)
 
