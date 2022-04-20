@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL = "/itineraires"
+LOGOUT_REDIRECT_URL = "/itineraires"
 # Application definition
 
 INSTALLED_APPS = [
