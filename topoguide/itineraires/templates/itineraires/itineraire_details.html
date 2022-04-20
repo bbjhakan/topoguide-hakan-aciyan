@@ -1,0 +1,59 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      padding-left: 8px;
+    }
+    th {text-align: left}
+    td {text-align: center}
+    </style>
+<div> <h1> {{it.titre}}: <small> depuis {{it.depart}} </small> </h1>
+
+<div style= 'float:left; padding-right: 1%'>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Altitude de départ</th>
+            <td>{{ it.altitude_depart }}m</td>
+        </tr>
+        <tr>
+            <th>Altitude min</th>
+            <td>{{ it.altitude_min }}m</td>
+        </tr>
+        <tr>
+            <th>Altitude max</th>
+            <td>{{ it.altitude_max }}m</td>
+        </tr>
+        <tr>
+            <th>Dénivelé positif cumulé</th>
+            <td>{{ it.denivele_pos }}m</td>
+        </tr>
+          
+        <tr>
+            <th>Dénivelé négatif cumulé</th>
+            <td>{{ it.denivele_neg }}m</td>
+        </tr>
+        <tr>
+            <th>Durée estimée (en heures)</th>
+            <td>{{ it.duree_estimee }}</td>
+        </tr>
+        <tr>
+            <th>Difficulté estimée (de 1 à 5)</th>
+            <td>{{ it.difficulte_estimee }}</td>
+        </tr>
+
+        </tr>
+        </thead>
+    </table>
+</div>
+
+<div>
+    <h2> A propos du parcours </h2>
+    <div>
+        <p >{{it.description|linebreaks}}</p>
+    </div>
+</div>

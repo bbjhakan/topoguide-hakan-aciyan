@@ -1,27 +1,34 @@
 <header>
-    <input type="button" onclick= window.location.href="../accounts/login"
-       value="LOGIN" style="float: right">
+    {% if user.is_authenticated %}
+        <input type="button" onclick= window.location.href="../accounts/logout"
+        value="LOGOUT" style="float: right">
+    {%else %}
+        <input type="button" onclick= window.location.href="../accounts/login"
+        value="LOGIN" style="float: right">
+    {%endif%}
 </header>
 <h1>Itinéraires</h1>
-
-<table class="table table-striped" style="text-align: center">
-    <thead>
-    <tr>
-        <th>Titre</th>
-        <th>Durée estimée</th>
-        <th>Point de départ</th>
-        <th>Difficulté estimée</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for it in itineraires %}
+{%if itineraires %}
+    <table class="table table-striped" style="text-align: center">
+        <thead>
         <tr>
-           
-            <td>{{ it.titre }}</td>
-            <td>{{a}}h{{b}}</td>
-            <td>{{ it.depart}} </td>
-            <td>{{ it.difficulte_estimee}}/5</td>
+            <th>Titre</th>
+            <th>Durée estimée</th>
+            <th>Point de départ</th>
+            <th>Difficulté estimée</th>
         </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        {% for it in itineraires %}
+            <tr>
+                <td>{{ it.titre }}</td>
+                <td>{{ it.duree_estimee }}</td>
+                <td>{{ it.depart}} </td>
+                <td>{{ it.difficulte_estimee}}/5</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{%else%}
+    <div>Pas d'itinéraires disponibles</div>
+{%endif%}
