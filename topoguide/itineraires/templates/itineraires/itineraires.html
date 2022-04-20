@@ -1,34 +1,35 @@
+
+
 <header>
-    {% if user.is_authenticated %}
-        <input type="button" onclick= window.location.href="../accounts/logout"
-        value="LOGOUT" style="float: right">
-    {%else %}
-        <input type="button" onclick= window.location.href="../accounts/login"
-        value="LOGIN" style="float: right">
-    {%endif%}
+    {% block bouton  %}{{block.super}}{% endblock %}
+    
 </header>
-<h1>Itinéraires</h1>
-{%if itineraires %}
-    <table class="table table-striped" style="text-align: center">
-        <thead>
-        <tr>
-            <th>Titre</th>
-            <th>Durée estimée</th>
-            <th>Point de départ</th>
-            <th>Difficulté estimée</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for it in itineraires %}
+{% block title %}Liste des itinéraires{% endblock title%}
+
+{% block content %}
+    <div><h1> Itinéraires</h1></div>
+    {%if itineraires %}
+        <table class="table table-striped" style="text-align: center">
+            <thead>
             <tr>
-                <td>{{ it.titre }}</td>
-                <td>{{ it.duree_estimee }}</td>
-                <td>{{ it.depart}} </td>
-                <td>{{ it.difficulte_estimee}}/5</td>
+                <th>Titre</th>
+                <th>Durée estimée (en heures)</th>
+                <th>Point de départ</th>
+                <th>Difficulté estimée (de 1 à 5)</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{%else%}
-    <div>Pas d'itinéraires disponibles</div>
-{%endif%}
+            </thead>
+            <tbody>
+            {% for itineraire in itineraires %}
+                <tr>
+                    <td><a href={{it.id}}>{{ itineraire.titre }}</a></td>
+                    <td>{{ itineraire.duree_estimee }}</td>
+                    <td>{{ itineraire.depart}} </td>
+                    <td>{{ itineraire.difficulte_estimee}}/5</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {%else%}
+        <div>Pas d'itinéraires disponibles</div>
+    {%endif%}
+{% endblock %}

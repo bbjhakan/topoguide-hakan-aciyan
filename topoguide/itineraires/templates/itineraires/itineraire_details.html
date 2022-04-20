@@ -1,19 +1,23 @@
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-    table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 5px;
-      padding-left: 8px;
-    }
-    th {text-align: left}
-    td {text-align: center}
-    </style>
-<div> <h1> {{it.titre}}: <small> depuis {{it.depart}} </small> </h1>
+{% extends 'base.html' %}
+{% block bouton  %}{{block.super}}{% endblock %}
 
-<div style= 'float:left; padding-right: 1%'>
+
+{% block content %}
+    <style>
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        }
+        th, td {
+        padding: 5px;
+        padding-left: 8px;
+        }
+        th {text-align: left}
+        td {text-align: center}
+        </style>
+    <div> <h1> {{it.titre}}: <small> depuis {{it.depart}} </small> </h1>
+
+<div style= 'float:left; padding-right: 3%'>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -39,7 +43,7 @@
         </tr>
         <tr>
             <th>Durée estimée (en heures)</th>
-            <td>{{ it.duree_estimee }}</td>
+            <td>{{ it.duree_estimee}}</td>
         </tr>
         <tr>
             <th>Difficulté estimée (de 1 à 5)</th>
@@ -57,3 +61,11 @@
         <p >{{it.description|linebreaks}}</p>
     </div>
 </div>
+
+<h2> SORTIE </h2>
+{%if sorties %}
+    <p>Il existe au moins une sortie</p>
+{%else%}
+    <p> Il n'y a aucune sortie liée à cet itinéraire</p>
+{%endif%}
+{% endblock %}
