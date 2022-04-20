@@ -2,9 +2,11 @@ from django.urls import path
 
 from . import views
 
-app_name = 'itineraires'
 
 urlpatterns = [
     path('',views.itineraires, name='itineraires'),
-    path('<int:itineraire_id>/', views.itineraire_details, name='itineraire_details')
+    path('<int:itineraire_id>/', views.itineraire_details, name='itineraire_details'),
+    path('nouvelle_sortie', views.nouvelle_sortie, name='nouvelle_sortie'),
+
+
 ]
