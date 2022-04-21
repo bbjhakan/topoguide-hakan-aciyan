@@ -1,4 +1,8 @@
-<form method="POST" class="post-form">{% csrf_token %}
+{% if sortie.utilisateur == request.user%}
+    <form method="POST" class="post-form">{% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="save btn btn-default">Save</button>
-</form>
+    </form>
+{%else%}
+    <p> Vous n'êtes pas l'auteur de cette sortie, et ne pouvez donc pas la modifier !</p>
+{%endif%}
