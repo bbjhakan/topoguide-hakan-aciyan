@@ -8,7 +8,7 @@
 
     <a href ="{% url 'itineraires' %}" class="noir"> Itinéraires</a> > <a href ="{% url 'itineraire_details' sortie.itineraire.id %}" class="noir"> {{ sortie.itineraire.titre }} </a> > <a href ="{% url 'sortie' sortie.id %}" class="noir"> {{s}} </a>
     <div><h1> Sortie - {{sortie.itineraire}} - par {{sortie.utilisateur}}</h1></div>
-
+    <p> Vous pouvez comparer les données informées par les randonneurs avec les données estimées par nos experts (valeurs entre parenthèses) !
     <style>
         table, th, td {
         border: 1px solid black;
@@ -36,11 +36,15 @@
             </tr>
             <tr>
                 <th>Durée réelle (en h)</th>
-                <td>{{ sortie.duree_reelle }}</td>
+                {% if minute != 0 %}
+                    <td>{{heure}}h{{minute}} (estimée: {{hit}}h{{mnit}})</td>
+                {% else %}
+                    <td>{{heure}}h (estimée: {{hit}}h{{mnit}})</td>
+                {%endif%}
             </tr>
             <tr>
                 <th>Difficulté réelle (de 1 à 5)</th>
-                <td>{{ sortie.difficulte_reelle }}</td>
+                <td>{{ sortie.difficulte_reelle }} (estimée: {{sortie.itineraire.difficulte_estimee}})</td>
             </tr>
             <tr>
                 <th>Nombre de personnes ayant participé à la sortie</th>

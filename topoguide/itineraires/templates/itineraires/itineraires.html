@@ -11,21 +11,22 @@
     <p> Vous êtes actuellement sur la page où sont listés les itinéraires disponibles ainsi que certaines caractéristiques de ces itinéraires. 
         <br> Vous pouvez, si vous le souhaitez, trouver davantage d'informations sur les itinéraires en cliquant sur le titre de chacun de ces itinéraires. Vous y trouverez également des commentaires de personnes ayant emprunté ces itinéraires. </p>
     {%if itineraires %}
-        <table class="table table-striped" style="text-align: center">
+        <table class="table table-striped" style="text-align: center; border-collapse : separate;
+        border-spacing : 9px;">
             <thead>
             <tr>
                 <th>Titre</th>
-                <th>Durée estimée (en heures)</th>
                 <th>Point de départ</th>
-                <th>Difficulté estimée (de 1 à 5)</th>
+                <th>Altitude de départ</th>
+                <th>Difficulté estimée</th>
             </tr>
             </thead>
             <tbody>
             {% for itineraire in itineraires %}
                 <tr>
                     <td><a href="{% url 'itineraire_details' itineraire.id %}">{{ itineraire.titre }}</a></td>
-                    <td>{{ itineraire.duree_estimee }}</td>
-                    <td>{{ itineraire.depart}} </td>
+                    <td>{{ itineraire.depart }}</td>
+                    <td>{{ itineraire.altitude_depart}}m </td>
                     <td>{{ itineraire.difficulte_estimee}}/5</td>
                 </tr>
             {% endfor %}
