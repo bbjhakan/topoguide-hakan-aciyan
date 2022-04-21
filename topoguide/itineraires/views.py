@@ -29,8 +29,22 @@ def nouvelle_sortie(request):
             post = form.save(commit=False)
             post.utilisateur = request.user
             post.save()
-            return redirect('itineraires/sortie/')
+            return redirect('../')
     else:
         form = SortieForm()
     return render(request, 'itineraires/nouvelle_sortie.html', {'form': form})
+
         
+@login_required
+def modifier_sortie(request, sortie_id):
+    sortie = get_object_or_404(Sortie, pk=sortie_id)
+    if request.method == "POST":
+        form = SortieForm(request.POST, instance=sortie)
+        if form.is_valid():
+            sortie = form.save(commit=False)
+            sortie.utilisateur = request.user
+            sortie.save()
+            return redirect(f"../{sortie_id}", pk=sortie.pk)
+    else:
+        form = SortieForm(instance=sortie)
+    return render(request, 'itineraires/sortie_edit.html', {'form': form})
