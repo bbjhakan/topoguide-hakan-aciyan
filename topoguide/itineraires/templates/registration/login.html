@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{%block nav%}{{block.super}}{%endblock%}
+{% block content %}
+
+  {% if form.errors %}
+    <p>Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez réessayer.</p>
+  {% endif %}
+
+
+    {% if user.is_authenticated %}
+      <p>Vous êtes déjà connecté.
+        <br>
+        <a href ="{% url 'itineraires'%}">Retour sur la page d'accueil.</a>
+      </p>
+    
+    {%else %}
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <table>
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+            </table>
+            <input type="submit" value="login" />
+            <input type="hidden" name="next" value="{{ next }}" />
+         </form>
+         <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
+    {%endif%}
+  {# Assumes you setup the password_reset view in your URLconf #}
+  
+{% endblock %}
