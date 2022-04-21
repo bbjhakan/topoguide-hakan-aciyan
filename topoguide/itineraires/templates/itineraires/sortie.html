@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block bouton  %}{{block.super}}{% endblock %}
+{% block title %}Sortie - {{sortie.itineraire}}{% endblock title%}
+
+{% block content %}
+    <div><h1> Sortie - {{sortie.itineraire}} - par {{sortie.utilisateur}}</h1></div>
+
+    <style>
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        }
+        th, td {
+        padding: 5px;
+        padding-left: 8px;
+        }
+        th {text-align: left}
+        td {text-align: center}
+    </style>
+
+
+    <div style= 'float:left; padding-right: 3%'>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Itineraire</th>
+                <td>{{ sortie.itineraire }}</td>
+            </tr>
+            <tr>
+                <th>Date de la sortie</th>
+                <td>{{ sortie.date_de_sortie }}</td>
+            </tr>
+            <tr>
+                <th>Durée réelle (en h)</th>
+                <td>{{ sortie.duree_reelle }}</td>
+            </tr>
+            <tr>
+                <th>Difficulté réelle (de 1 à 5)</th>
+                <td>{{ sortie.difficulte_reelle }}</td>
+            </tr>
+            <tr>
+                <th>Nombre de personnes ayant participé à la sortie</th>
+                <td>{{ sortie.nb_personne }}</td>
+            </tr>
+              
+            <tr>
+                <th>Niveau du groupe</th>
+                <td>{%if sortie.niveaux == '0'%} Tous débutants 
+                    {%elif sortie.niveaux == '1'%} Mixte
+                    {%else%} Tous experts
+                    {%endif%}
+                </td>
+            </tr>
+            <tr>
+                <th>Météo</th>
+                <td>{%if sortie.meteo == '0'%} Bonne météo
+                    {%elif sortie.meteo == '1'%} Météo moyenne
+                    {%else%} Mauvaise météo
+                    {%endif%}</td>
+            </tr>
+            </thead>
+        </table>
+{% endblock %}

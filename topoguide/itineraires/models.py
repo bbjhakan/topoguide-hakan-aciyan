@@ -2,6 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator 
 
+
+CHOICE1 = '0'
+CHOICE2 = '1'
+CHOICE3 = '2'
+
 # Create your models here.
 class Itineraire(models.Model):
     titre = models.CharField(max_length=200)
@@ -26,15 +31,15 @@ class Sortie(models.Model):
     
    ## attribut expérience du groupe
 
-   NIVEAUX = [('0', ('Tous débutants')),
-      ('1', ('Mixte')),
-      ('2', ('Tous experts')),]
+   NIVEAUX = [(CHOICE1, ('Tous débutants')),
+      (CHOICE2, ('Mixte')),
+      (CHOICE3, ('Tous experts')),]
    niveaux = models.CharField("Niveau des personnes", max_length=32, choices=NIVEAUX)
 
     
-   METEO = [('0', ('Bonne météo')),
-      ('1', ('Météo moyenne')),
-      ('2', ('Mauvaise météo')),]
+   METEO = [(CHOICE1, ('Bonne météo')),
+      (CHOICE2, ('Météo moyenne')),
+      (CHOICE3, ('Mauvaise météo')),]
    meteo = models.CharField("Météo", max_length=32, choices=METEO)
    difficulte_reelle  = models.IntegerField("Difficulté ressentie (de 1 à 5)",default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
    date_de_sortie = models.DateField("Date de sortie")
