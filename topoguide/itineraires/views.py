@@ -22,22 +22,26 @@ def sortie(request, sortie_id):
     sortie = get_object_or_404(Sortie, pk=sortie_id)
     attributs = Sortie.objects.filter(id=sortie_id)
     
-    return render(request, 'itineraires/sortie.html', {'sortie':sortie, 'attributs':attributs})
+    #Ajout dans le context de s pour pouvoir faire une barre de navigation lisible (voir sortie.html)
+    return render(request, 'itineraires/sortie.html', {'sortie':sortie, 'attributs':attributs, 's': str(sortie)}) 
 
 #Vue pour créer une nouvelle sortie avec un formulaire
 @login_required
 def nouvelle_sortie(request, itineraire_id):
+    itineraire = get_object_or_404(Itineraire, pk=itineraire_id)
     if request.method == "POST":
         form = SortieForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.utilisateur = request.user
-            post.itineraire = get_object_or_404(Itineraire, pk=itineraire_id)
+            post.itineraire = itineraire
             post.save()
+            
             return redirect('../')
     else:
         form = SortieForm()
-    return render(request, 'itineraires/nouvelle_sortie.html', {'form': form})
+        
+    return render(request, 'itineraires/nouvelle_sortie.html', {'form': form, 'itineraire': itineraire})
 
 #Vue pour modifier une sortie avec un formulaire pré-rempli  
 @login_required
@@ -49,7 +53,10 @@ def modifier_sortie(request, sortie_id):
             sortie = form.save(commit=False)
             sortie.utilisateur = request.user
             sortie.save()
+            
             return redirect(f"../{sortie_id}", pk=sortie.pk)
     else:
         form = SortieForm(instance=sortie)
-    return render(request, 'itineraires/sortie_edit.html', {'form': form, 'sortie':sortie})
+        
+    #Ajout dans le context de s pour pouvoir faire une barre de navigation lisible (voir sortie_edit.html)
+    return render(request, 'itineraires/sortie_edit.html', {'form': form, 'sortie':sortie, 's': str(sortie)})

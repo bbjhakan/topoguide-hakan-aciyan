@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5%}
 {%block nav%} {{block.super}} {%endblock%}
 
 {% block title %}Sortie - {{sortie.itineraire}}{% endblock title%}
 
 {% block content %}
+
+    <a href ="{% url 'itineraires' %}" class="noir"> Itinéraires</a> > <a href ="{% url 'itineraire_details' sortie.itineraire.id %}" class="noir"> {{ sortie.itineraire.titre }} </a> > <a href ="{% url 'sortie' sortie.id %}" class="noir"> {{s}} </a>
     <div><h1> Sortie - {{sortie.itineraire}} - par {{sortie.utilisateur}}</h1></div>
 
     <style>
@@ -61,4 +64,11 @@
             </tr>
             </thead>
         </table>
+
+        <br>
+        {% if sortie.utilisateur == request.user %}
+                    <a href="{% url 'modifier_sortie' sortie.id %}"> 
+                       <button type="submit" class="btn btn-sucess">Modifier</button>
+                    </a>
+                {%endif%}
 {% endblock %}

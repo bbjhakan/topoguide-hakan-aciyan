@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
-
+{% load django_bootstrap5 %}
 {% block nav%} {{block.super}} {%endblock%}
 
 
 
 {% block content %}
+<a href ="{% url 'itineraires' %}" class="noir"> Itinéraires</a> > <a href ="{% url 'itineraire_details' it.id %}" class="noir"> {{ it.titre }} </a>
     <style>
         table, th, td {
         border: 1px solid black;
@@ -16,6 +17,13 @@
         }
         th {text-align: left}
         td {text-align: center}
+
+        .sommaire {
+            color: grey
+        }
+        .noir{
+            color: black
+        }
         </style>
     <div> <h1> {{it.titre}}: <small> depuis {{it.depart}} </small> </h1>
 
@@ -56,15 +64,17 @@
         </thead>
     </table>
 </div>
-
+<a href="#info" class="sommaire">1. Informations sur le parcours</a> 
+<br>
+<a href="#sorties" class="sommaire">2. Liste de sorties</a>
 <div>
-    <h2> A propos du parcours </h2>
+    <h2 id="info"> A propos du parcours </h2>
     <div>
         <p >{{it.description|linebreaks}}</p>
     </div>
 </div>
 
-<h2> SORTIE </h2>
+<h2 id = "sorties"> SORTIE </h2>
 {%if sorties %}
 <table class="table table-striped" style="text-align: center">
     <thead>
@@ -84,12 +94,15 @@
             <td>{{ sortie.difficulte_reelle}} </td>
             <td>{{ sortie.date_de_sortie}}</td>
             <td> 
-                <input type="button" onclick= window.location.href="{% url 'sortie' sortie.id %}"
-                    value="CONSULTER" style="float: left">
+                <a href="{% url 'sortie' sortie.id %}"> 
+                    <button type="submit" class="btn btn-sucess">Consulter</button>
+                </a>
+                
 
                 {% if sortie.utilisateur == request.user %}
-                    <input type="button" onclick= window.location.href="{% url 'modifier_sortie' sortie.id %}"
-                    value="MODIFIER" style="float: right">
+                    <a href="{% url 'modifier_sortie' sortie.id %}"> 
+                       <button type="submit" class="btn btn-sucess">Modifier</button>
+                    </a>
                 {%endif%}
                  </td>
         </tr>

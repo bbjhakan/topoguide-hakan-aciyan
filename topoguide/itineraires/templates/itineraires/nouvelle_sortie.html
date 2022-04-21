@@ -3,9 +3,11 @@
 {%block nav%} {{block.super}} {%endblock%}
 
 
-{%block content %}<h2>Décrivez votre sortie !</h2>
+{%block content %}
+<a href ="{% url 'itineraires' %}" class="noir"> Itinéraires</a> > <a href ="{% url 'itineraire_details' itineraire.id %}" class="noir"> {{ itineraire.titre }} </a> > <a href ="{% url 'nouvelle_sortie' itineraire.id %}" class="noir"> Nouvelle sortie </a>
+<h2>Décrivez votre sortie !</h2>
 <form method="POST" class="post-form">{% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="save btn btn-default">Save</button>
+    <button type="submit" class="save btn btn-default">Sauvegarder</button>
 </form>
 {%endblock%}

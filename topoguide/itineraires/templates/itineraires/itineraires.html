@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
 {%block nav%} {{block.super}} {%endblock%}
 
 {% block title %}Liste des itinéraires{% endblock title%}
 
 {% block content %}
     <div><h1> Itinéraires</h1></div>
+
+    <p> Vous êtes actuellement sur la page où sont listés les itinéraires disponibles ainsi que certaines caractéristiques de ces itinéraires. 
+        <br> Vous pouvez, si vous le souhaitez, trouver davantage d'informations sur les itinéraires en cliquant sur le titre de chacun de ces itinéraires. Vous y trouverez également des commentaires de personnes ayant emprunté ces itinéraires. </p>
     {%if itineraires %}
         <table class="table table-striped" style="text-align: center">
             <thead>
