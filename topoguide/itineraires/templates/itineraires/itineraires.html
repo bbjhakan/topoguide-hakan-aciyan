@@ -1,9 +1,6 @@
-
-
-<header>
-    {% block bouton  %}{{block.super}}{% endblock %}
-    
-</header>
+{% extends 'base.html' %}
+{%block nav%} {{block.super}} {%endblock%}
+{% block bouton  %}{{block.super}}{% endblock %}
 {% block title %}Liste des itinéraires{% endblock title%}
 
 {% block content %}
@@ -21,7 +18,7 @@
             <tbody>
             {% for itineraire in itineraires %}
                 <tr>
-                    <td><a href={{it.id}}>{{ itineraire.titre }}</a></td>
+                    <td><a href="{% url 'itineraire_details' itineraire.id %}">{{ itineraire.titre }}</a></td>
                     <td>{{ itineraire.duree_estimee }}</td>
                     <td>{{ itineraire.depart}} </td>
                     <td>{{ itineraire.difficulte_estimee}}/5</td>
@@ -30,6 +27,6 @@
             </tbody>
         </table>
     {%else%}
-        <div>Pas d'itinéraires disponibles</div>
+        <div>Pas d'itinéraire disponible</div>
     {%endif%}
 {% endblock %}

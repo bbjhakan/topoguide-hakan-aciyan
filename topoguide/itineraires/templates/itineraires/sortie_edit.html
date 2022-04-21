@@ -1,3 +1,8 @@
+{% extends 'base.html' %}
+{%block bouton%}{%endblock%}
+{%block nav%} {{block.super}} {%endblock%}
+
+{% block content %}
 {% if sortie.utilisateur == request.user%}
     <form method="POST" class="post-form">{% csrf_token %}
     {{ form.as_p }}
@@ -5,4 +10,7 @@
     </form>
 {%else%}
     <p> Vous n'êtes pas l'auteur de cette sortie, et ne pouvez donc pas la modifier !</p>
+    <a href="{% url 'sortie' sortie.id %}"> Retour sur la page de détail de la sortie </a>
+
 {%endif%}
+{%endblock%}

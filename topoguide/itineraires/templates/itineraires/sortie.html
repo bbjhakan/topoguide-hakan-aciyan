@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{%block nav%} {{block.super}} {%endblock%}
 {% block bouton  %}{{block.super}}{% endblock %}
 {% block title %}Sortie - {{sortie.itineraire}}{% endblock title%}
 

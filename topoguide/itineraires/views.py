@@ -22,12 +22,13 @@ def sortie(request, sortie_id):
     return render(request, 'itineraires/sortie.html', {'sortie':sortie, 'attributs':attributs})
 
 @login_required
-def nouvelle_sortie(request):
+def nouvelle_sortie(request, itineraire_id):
     if request.method == "POST":
         form = SortieForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.utilisateur = request.user
+            post.itineraire = get_object_or_404(Itineraire, pk=itineraire_id)
             post.save()
             return redirect('../')
     else:
@@ -47,4 +48,4 @@ def modifier_sortie(request, sortie_id):
             return redirect(f"../{sortie_id}", pk=sortie.pk)
     else:
         form = SortieForm(instance=sortie)
-    return render(request, 'itineraires/sortie_edit.html', {'form': form})
+    return render(request, 'itineraires/sortie_edit.html', {'form': form, 'sortie':sortie})
