@@ -1,15 +1,7 @@
 {% extends 'base.html' %}
 
 {% block nav%} {{block.super}} {%endblock%}
-{% block bouton  %}
-    {% if user.is_authenticated %}
-        <input type="button" onclick= window.location.href="../../accounts/logout?next={{request.path}}"
-        value="LOGOUT" style="float: right">
-    {%else %}
-        <input type="button" onclick= window.location.href="../../accounts/login?next={{request.path}}"
-        value="LOGIN" style="float: right">
-    {%endif%}
-{% endblock %}
+
 
 
 {% block content %}
